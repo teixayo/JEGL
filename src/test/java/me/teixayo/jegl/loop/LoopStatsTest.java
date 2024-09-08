@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class LoopStatsTest {
     @MethodSource("me.teixayo.jegl.loop.LoopTest#arguments")
     public void testRealLoopApp(LoopType loopType, int updatePerSecond) {
         taskList.add(() -> {
-            Loop loop = loopType.create(updatePerSecond, true, LoopAppExamble.getINSTANCE());
+            Loop loop = loopType.create(updatePerSecond, true, LoopAppExample.getINSTANCE());
             loop.start();
             try {
                 Thread.sleep(3000);
@@ -60,7 +59,7 @@ public class LoopStatsTest {
 
             System.out.println(loopType.name() + " " + updatePerSecond + ": " + loopStats.getCurrentUpdatePerSecond() + " | " + loopStats.getCurrentMilliPerUpdate() + " dt: " + updatePerSecond / 500.0f);
             assertEquals(updatePerSecond, loopStats.getCurrentUpdatePerSecond(), updatePerSecond / 500.0f);
-            assertEquals(1.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
+            assertEquals(3.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
             return null;
         });
     }

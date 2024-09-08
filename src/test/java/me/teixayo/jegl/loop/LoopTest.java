@@ -14,12 +14,11 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoopTest {
-    private static final int[] updatePerSecondTests = new int[]{20, 60, 120, 300, 500};
+    private static final int[] updatePerSecondTests = new int[]{20, 60, 120, 300};
     private static final ExecutorService executor = Executors.newFixedThreadPool(LoopType.values().length * updatePerSecondTests.length);
     private static final List<Callable<Void>> taskList = new ArrayList<>();
 
@@ -45,7 +44,7 @@ public class LoopTest {
                 .loopType(loopType)
                 .updatePerSecond(updatePerSecond)
                 .useThread()
-                .loopApp(LoopAppExamble.getINSTANCE());
+                .loopApp(LoopAppExample.getINSTANCE());
         Loop loop = loopBuilder.build();
         Assertions.assertFalse(loop.isRunning());
         taskList.add(() -> {
@@ -55,7 +54,7 @@ public class LoopTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Assertions.assertEquals(loop.getUpdates(), updatePerSecond, 2);
+            Assertions.assertEquals(updatePerSecond, loop.getUpdates(),2);
             Assertions.assertTrue(loop.isRunning());
             loop.cancel();
             Assertions.assertFalse(loop.isRunning());

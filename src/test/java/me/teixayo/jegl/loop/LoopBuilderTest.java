@@ -17,13 +17,13 @@ public class LoopBuilderTest {
         LoopBuilder loopBuilder = LoopBuilder.builder()
                 .loopType(loopType)
                 .updatePerSecond(updatePerSecond)
-                .loopApp(LoopAppExamble.getINSTANCE());
+                .loopApp(LoopAppExample.getINSTANCE());
         if (useThread) loopBuilder.useThread();
 
         Assertions.assertEquals(loopBuilder.getLoopType(), loopType);
         Assertions.assertEquals(loopBuilder.getUpdatePerSecond(), updatePerSecond);
         Assertions.assertEquals(loopBuilder.isUseThread(), useThread);
-        Assertions.assertEquals(loopBuilder.getLoopApp(), LoopAppExamble.getINSTANCE());
+        Assertions.assertEquals(loopBuilder.getLoopApp(), LoopAppExample.getINSTANCE());
         Loop loop = loopBuilder.build();
         Assertions.assertNotNull(loop);
         System.out.println(updatePerSecond + " " + loopType.name() + " passed.");
