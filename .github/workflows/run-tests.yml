@@ -50,26 +50,3 @@ jobs:
         run: |
           mvn test
 
-  build-macos:
-    runs-on: macos-latest
-    needs: build-windows  # Run macOS after Windows
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Cache Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Run Unit Tests
-        run: |
-          mvn test
