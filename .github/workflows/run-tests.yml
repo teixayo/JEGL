@@ -27,4 +27,4 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Run Unit Tests
         run: |
-          mvn test
+          mvn -B test --errors --fail-at-end
