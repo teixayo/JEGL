@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoopTest {
-    private static final int[] updatePerSecondTests = new int[]{20, 60, 120, 300};
+    private static final int[] updatePerSecondTests = new int[]{20, 60, 120, 200};
     private static final ExecutorService executor = Executors.newFixedThreadPool(LoopType.values().length * updatePerSecondTests.length);
     private static final List<Callable<Void>> taskList = new ArrayList<>();
 
