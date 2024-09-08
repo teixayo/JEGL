@@ -66,7 +66,7 @@ public class LoopTypesTest implements LoopApp {
 
             long expectedUpdates = totalElapsedTime / loop.getNanosPerUpdate();
             long currentUpdates = updates;
-            System.out.println(updatePerSecond + " | diff: " + diff);
+            System.out.println(sleepTime + " | " + updatePerSecond + " | diff: " + diff + " | dt:" + loop.getNanosPerUpdate());
             assertEquals(sleepTime, totalElapsedTime, loop.getNanosPerUpdate());
             assertEquals(expectedUpdates, currentUpdates, loop.getNanosPerUpdate());
             return null;

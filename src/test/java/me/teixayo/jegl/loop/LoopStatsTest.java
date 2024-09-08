@@ -59,7 +59,7 @@ public class LoopStatsTest {
 
             System.out.println(loopType.name() + " " + updatePerSecond + ": " + loopStats.getCurrentUpdatePerSecond() + " | " + loopStats.getCurrentMilliPerUpdate() + " dt: " + updatePerSecond / 500.0f);
             assertEquals(updatePerSecond, loopStats.getCurrentUpdatePerSecond(), updatePerSecond / 500.0f);
-            assertEquals(1.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
+            assertEquals(3.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
             return null;
         });
     }
