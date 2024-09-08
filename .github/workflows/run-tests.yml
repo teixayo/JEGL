@@ -52,7 +52,7 @@ jobs:
 
   build-macos:
     runs-on: macos-latest
-    needs: build-linux  # Run macOS after Windows
+    needs: build-windows  # Run macOS after Windows
     steps:
       - uses: actions/checkout@v2
 
