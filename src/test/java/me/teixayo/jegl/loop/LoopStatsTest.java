@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import me.teixayo.jegl.loop.loops.Loop;
 import me.teixayo.jegl.loop.loops.LoopType;
 import me.teixayo.jegl.loop.loops.LoopTypesTest;
+import me.teixayo.jegl.utils.DaemonThread;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -59,7 +60,7 @@ public class LoopStatsTest {
 
             System.out.println(loopType.name() + " " + updatePerSecond + ": " + loopStats.getCurrentUpdatePerSecond() + " | " + loopStats.getCurrentMilliPerUpdate() + " dt: " + updatePerSecond / 500.0f);
             assertEquals(updatePerSecond, loopStats.getCurrentUpdatePerSecond(), updatePerSecond / 500.0f);
-            assertEquals(3.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
+            assertEquals(1.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
             return null;
         });
     }
@@ -68,6 +69,7 @@ public class LoopStatsTest {
     @Test
     @Order(3)
     public void executeLoopTests() {
+        DaemonThread.active();
         for (Callable<Void> task : taskList) {
             task.call();
         }

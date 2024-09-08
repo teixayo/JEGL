@@ -3,6 +3,7 @@ package me.teixayo.jegl.loop.loops;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import me.teixayo.jegl.loop.LoopApp;
+import me.teixayo.jegl.utils.DaemonThread;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -78,6 +79,7 @@ public class LoopTypesTest implements LoopApp {
     @Order(2)
     public void executeLoopTests() {
 
+        DaemonThread.active();
         for (Callable<Void> task : taskList) {
             task.call();
         }
