@@ -1,4 +1,4 @@
-package me.teixayo.jegl.loop.loops.busywait;
+package me.teixayo.jegl.loop.loops.types.busywait;
 
 import me.teixayo.jegl.loop.LoopApp;
 import me.teixayo.jegl.loop.loops.Loop;

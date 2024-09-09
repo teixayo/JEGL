@@ -1,6 +1,7 @@
 package me.teixayo.jegl.loop.loops;
 
 import lombok.Getter;
+import me.teixayo.jegl.exception.InvalidLoopConfigurationException;
 import me.teixayo.jegl.loop.LoopApp;
 import me.teixayo.jegl.loop.LoopStats;
 
@@ -38,7 +39,6 @@ public abstract class Loop implements Runnable {
         run();
     }
 
-
     @Override
     public void run() {
         startTime = System.nanoTime();
@@ -55,9 +55,16 @@ public abstract class Loop implements Runnable {
             loopStats.update(updateTimeNanos, elapsedTimeNanos);
             updates++;
         }
-        thread.interrupt();
         loopApp.close();
+    }
+    public void changeUpdatePerSecond(int updatePerSecond) {
+        if (updatePerSecond <= 0) {
+            throw new IllegalArgumentException("Invalid updatePerSecond: " + updatePerSecond + ". It must be greater than 0.");
+        }
+        this.nanosPerUpdate = (long) ((1.0 / updatePerSecond) * 1E9);
+        this.loopStats.setUpdatePerSecond(updatePerSecond);
     }
 
     protected abstract void sleep();
+
 }

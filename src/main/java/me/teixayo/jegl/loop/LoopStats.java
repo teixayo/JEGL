@@ -8,7 +8,7 @@ import lombok.Setter;
 public class LoopStats {
 
     private int updatePerSecond;
-    private double currentMilliPerUpdate;
+    private double currentMillisPerUpdate;
     private double currentUpdatePerSecond;
     private long totalElapsedTimeNanos;
     private int updates;
@@ -17,11 +17,11 @@ public class LoopStats {
     public LoopStats(int updatePerSecond) {
         this.updatePerSecond = updatePerSecond;
         this.currentUpdatePerSecond = updatePerSecond;
-        this.currentMilliPerUpdate = 0.0f;
+        this.currentMillisPerUpdate = 0.0f;
     }
 
     public void update(long updateTimeNanos, long elapsedTimeNanos) {
-        currentMilliPerUpdate = updateTimeNanos / 1E6;
+        currentMillisPerUpdate = updateTimeNanos / 1E6;
         totalElapsedTimeNanos += elapsedTimeNanos;
         updates++;
         if (updates % updatePerSecond == 0) {

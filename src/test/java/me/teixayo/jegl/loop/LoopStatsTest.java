@@ -1,9 +1,9 @@
 package me.teixayo.jegl.loop;
 
-import lombok.SneakyThrows;
+import me.teixayo.jegl.AsyncTestManager;
+import me.teixayo.jegl.LoopAppExample;
 import me.teixayo.jegl.loop.loops.Loop;
 import me.teixayo.jegl.loop.loops.LoopType;
-import me.teixayo.jegl.loop.loops.LoopTypesTest;
 import me.teixayo.jegl.utils.DaemonThread;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -12,65 +12,60 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoopStatsTest {
-    private static final ExecutorService executor = Executors.newFixedThreadPool(LoopType.values().length * LoopTypesTest.getUpdatePerSecondTests().length);
-    private static final List<Callable<Void>> taskList = new ArrayList<>();
 
     @Test
     @Order(1)
     public void testLoopStats() {
         LoopStats loopStats = new LoopStats(20);
+
         assertEquals(20, loopStats.getUpdatePerSecond());
-        assertEquals(20,loopStats.getCurrentUpdatePerSecond());
-        for(int i = 0; i < 40; i++) {
-            loopStats.update(1_000_000L, 50_000_000);
+        assertEquals(20, loopStats.getCurrentUpdatePerSecond());
+
+        for (int i = 0; i < 40; i++) {
+            loopStats.update((long) 1E6, (long) 50E6);
         }
-        assertEquals(loopStats.getCurrentUpdatePerSecond(), 20.0);
-        assertEquals(loopStats.getCurrentMilliPerUpdate(), 1.0);
-        assertEquals(loopStats.getUpdates(), 40);
+        assertEquals(20.0, loopStats.getCurrentUpdatePerSecond());
+        assertEquals(1.0, loopStats.getCurrentMillisPerUpdate());
+        assertEquals(40, loopStats.getUpdates());
     }
-    @SneakyThrows
+
     @ParameterizedTest
     @Order(2)
-    @MethodSource("me.teixayo.jegl.loop.LoopTest#arguments")
+    @MethodSource("me.teixayo.jegl.Statics#getArguments")
     public void testRealLoopApp(LoopType loopType, int updatePerSecond) {
-        taskList.add(() -> {
-            Loop loop = loopType.create(updatePerSecond, true, LoopAppExample.getINSTANCE());
+        Loop loop = LoopBuilder.builder()
+                .loopType(loopType)
+                .updatePerSecond(updatePerSecond)
+                .useThread()
+                .loopApp(LoopAppExample.getINSTANCE())
+                .build();
+
+        AsyncTestManager.submitTask(() -> {
             loop.start();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(3000);
             loop.cancel();
-
             LoopStats loopStats = loop.getLoopStats();
-
-            assertEquals(updatePerSecond, loopStats.getUpdatePerSecond());
-
-            System.out.println(loopType.name() + " " + updatePerSecond + ": " + loopStats.getCurrentUpdatePerSecond() + " | " + loopStats.getCurrentMilliPerUpdate() + " dt: " + updatePerSecond / 500.0f);
-            assertEquals(updatePerSecond, loopStats.getCurrentUpdatePerSecond(), updatePerSecond / 500.0f);
-//            assertEquals(3.0, loopStats.getCurrentMilliPerUpdate(), 0.2);
+            System.out.printf(
+                    "Loop Type: %-15s | Update Per Second: %4d | Current Update Rate: %6.2f | Millis Per Update: %6.2f | Delta: %.2f%n",
+                    loopType.name(),
+                    updatePerSecond,
+                    loopStats.getCurrentUpdatePerSecond(),
+                    loopStats.getCurrentMillisPerUpdate(),
+                    updatePerSecond / 500.0
+            );
+            assertEquals(updatePerSecond, loopStats.getUpdatePerSecond(), updatePerSecond / 500.0);
+            assertEquals(4.0, loopStats.getCurrentMillisPerUpdate(), 1.0);
             return null;
         });
     }
 
-    @SneakyThrows
     @Test
     @Order(3)
     public void executeLoopTests() {
-        DaemonThread.active();
-        for (Callable<Void> task : taskList) {
-            task.call();
-        }
+        AsyncTestManager.waitForCompletion();
     }
 }

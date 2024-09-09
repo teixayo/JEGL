@@ -1,4 +1,4 @@
-package me.teixayo.jegl.loop.loops.lock;
+package me.teixayo.jegl.loop.loops.types.lock;
 
 import me.teixayo.jegl.loop.LoopApp;
 import me.teixayo.jegl.loop.loops.Loop;
@@ -13,11 +13,11 @@ public class BusyWaitLockLoop extends Loop {
 
     @Override
     public void sleep() {
-        long nextTick = startTime + (nanosPerUpdate * updates) - 850_000;
+        long nextTick = startTime + (nanosPerUpdate * updates) - 850000;
         while (System.nanoTime() < nextTick) {
-            LockSupport.parkNanos(850_000);
+            LockSupport.parkNanos(850000);
         }
-        while (System.nanoTime() < nextTick + 850_000) {
+        while (System.nanoTime() < nextTick + 850000) {
             Thread.yield();
         }
     }

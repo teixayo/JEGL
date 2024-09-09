@@ -1,13 +1,11 @@
-package me.teixayo.jegl.loop.loops.lock;
+package me.teixayo.jegl.loop.loops.types.busywait;
 
 import me.teixayo.jegl.loop.LoopApp;
 import me.teixayo.jegl.loop.loops.Loop;
 
-import java.util.concurrent.locks.LockSupport;
+public class BusyWaitLoop extends Loop {
 
-public class LockLoop extends Loop {
-
-    public LockLoop(int updatePerSecond, boolean useThread, LoopApp loopApp) {
+    public BusyWaitLoop(int updatePerSecond, boolean useThread, LoopApp loopApp) {
         super(updatePerSecond, useThread, loopApp);
     }
 
@@ -15,7 +13,6 @@ public class LockLoop extends Loop {
     public void sleep() {
         long nextTick = startTime + (nanosPerUpdate * updates);
         while (System.nanoTime() < nextTick) {
-            LockSupport.parkNanos(850000);
         }
     }
 }
