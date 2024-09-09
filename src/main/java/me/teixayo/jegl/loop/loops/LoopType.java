@@ -2,10 +2,11 @@ package me.teixayo.jegl.loop.loops;
 
 import lombok.Getter;
 import me.teixayo.jegl.loop.LoopApp;
-import me.teixayo.jegl.loop.loops.lock.BusyWaitLockLoop;
-import me.teixayo.jegl.loop.loops.busywait.BusyWaitLoop;
-import me.teixayo.jegl.loop.loops.busywait.BusyWaitYield;
-import me.teixayo.jegl.loop.loops.lock.LockLoop;
+import me.teixayo.jegl.exception.LoopCreationException;
+import me.teixayo.jegl.loop.loops.types.lock.BusyWaitLockLoop;
+import me.teixayo.jegl.loop.loops.types.busywait.BusyWaitLoop;
+import me.teixayo.jegl.loop.loops.types.busywait.BusyWaitYield;
+import me.teixayo.jegl.loop.loops.types.lock.LockLoop;
 
 @Getter
 public enum LoopType {
@@ -21,12 +22,11 @@ public enum LoopType {
     }
 
     public Loop create(int updatePerSecond, boolean useThread, LoopApp loopApp) {
-        return switch (this) {
-            case BUSY_WAIT -> new BusyWaitLoop(updatePerSecond, true, loopApp);
-            case BUSY_WAIT_YIELD -> new BusyWaitYield(updatePerSecond, true, loopApp);
-            case BUSY_WAIT_LOCK -> new BusyWaitLockLoop(updatePerSecond, true, loopApp);
-            case LOCK -> new LockLoop(updatePerSecond, true, loopApp);
-        };
-
+        try {
+            return loopClass.getDeclaredConstructor(int.class, boolean.class, LoopApp.class)
+                    .newInstance(updatePerSecond, useThread, loopApp);
+        } catch (Exception exception) {
+            throw new LoopCreationException(exception);
+        }
     }
 }
