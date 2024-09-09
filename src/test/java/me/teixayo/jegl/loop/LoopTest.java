@@ -5,7 +5,6 @@ import me.teixayo.jegl.AsyncTestManager;
 import me.teixayo.jegl.LoopAppExample;
 import me.teixayo.jegl.loop.loops.Loop;
 import me.teixayo.jegl.loop.loops.LoopType;
-import me.teixayo.jegl.utils.DaemonThread;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -50,5 +49,18 @@ public class LoopTest {
     @Order(2)
     public void executeLoopTests() {
         AsyncTestManager.waitForCompletion();
+    }
+
+    @Test
+    public void testLoopChangeUpdatePerSecond() {
+        LoopBuilder loopBuilder = LoopBuilder.builder()
+                .updatePerSecond(20)
+                .useThread()
+                .loopApp(LoopAppExample.getINSTANCE());
+        Loop loop = loopBuilder.build();
+        loop.changeUpdatePerSecond(60);
+        assertThrows(IllegalArgumentException.class,() -> loop.changeUpdatePerSecond(0));
+        assertEquals((long) ((1.0 / 60) * 1E9), loop.getNanosPerUpdate());
+        assertEquals(60.0, loop.getLoopStats().getUpdatePerSecond());
     }
 }
