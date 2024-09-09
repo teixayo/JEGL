@@ -57,6 +57,7 @@ public class LoopStatsTest {
                     loopStats.getCurrentMillisPerUpdate(),
                     updatePerSecond / 500.0
             );
+
             assertEquals(updatePerSecond, loopStats.getUpdatePerSecond(), updatePerSecond / 500.0);
             assertEquals(4.0, loopStats.getCurrentMillisPerUpdate(), 1.0);
             return null;
