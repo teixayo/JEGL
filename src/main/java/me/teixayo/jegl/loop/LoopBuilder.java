@@ -41,7 +41,7 @@ public class LoopBuilder {
         checkLoopApp();
         checkUpdatePerSecondRange();
         checkLoopType();
-       return loopType.create(updatePerSecond, useThread, loopApp);
+        return loopType.create(updatePerSecond, useThread, loopApp);
     }
 
     private void checkLoopApp() {
@@ -49,11 +49,13 @@ public class LoopBuilder {
             throw new InvalidLoopConfigurationException("The LoopApp instance is missing. Please provide a valid LoopApp.");
         }
     }
+
     private void checkUpdatePerSecondRange() {
         if (updatePerSecond <= 0) {
             throw new InvalidLoopConfigurationException("Invalid updatePerSecond: " + updatePerSecond + ". It must be greater than 0.");
         }
     }
+
     private void checkLoopType() {
         if (this.loopType == null) {
             throw new InvalidLoopConfigurationException("The LoopType is missing. Please provide a valid LoopType.");

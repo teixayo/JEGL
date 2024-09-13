@@ -3,6 +3,7 @@ package me.teixayo.jegl.loop.loops;
 import lombok.Getter;
 import me.teixayo.jegl.loop.LoopApp;
 import me.teixayo.jegl.loop.LoopStats;
+
 @Getter
 public abstract class Loop implements Runnable {
 
@@ -55,6 +56,7 @@ public abstract class Loop implements Runnable {
         }
         loopApp.close();
     }
+
     public void changeUpdatePerSecond(int updatePerSecond) {
         if (updatePerSecond <= 0) {
             throw new IllegalArgumentException("Invalid updatePerSecond: " + updatePerSecond + ". It must be greater than 0.");

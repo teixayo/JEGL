@@ -1,4 +1,5 @@
 package me.teixayo.jegl.utils;
+
 public class DaemonThread {
 
     private static Thread daemonThread;
