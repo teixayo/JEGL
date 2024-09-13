@@ -8,7 +8,9 @@
 
 JEGL (Java Efficient Game Loop) is a lightweight Java library for creating smooth and efficient game loops. It helps manage game updates and timing accurately while using minimal CPU resources. It’s perfect for game development and real-time applications.
 
-### Dependency
+## Quick Start
+
+Here’s how to get started with JEGL and use different loop types for various needs.
 
 **Gradle:**
 
