@@ -10,8 +10,6 @@ JEGL (Java Efficient Game Loop) is a lightweight Java library for creating smoot
 
 ## Quick Start
 
-Here’s how to get started with JEGL and use different loop types for various needs.
-
 ### Dependency
 
 **Gradle:**
@@ -78,7 +76,7 @@ To fix issues with Windows sleep accuracy, make sure to call `DaemonThread.activ
 JEGL provides several types of loops to fit different needs:
 
 - **`BusyWaitLockLoop`**: Combines busy-waiting with locking to provide very accurate timing for updates while managing CPU usage effectively. It’s best for situations where accuracy is crucial.
-- **`LockLoop`**: Uses `LockSupport.parkNanos()` to efficiently sleep between updates. This type offers the best CPU usage while still maintaining good update accuracy, making it suitable for many applications.
+- **`LockLoop`**: Uses `LockSupport.parkNanos()` to efficiently sleep between updates. This type offers the best CPU usage while still maintaining good update accuracy.
 - **`BusyWaitLoop`**: Continuously checks the update time, which uses a lot of CPU and can cause high CPU usage. It’s not recommended for most cases due to its inefficient CPU usage.
 - **`BusyWaitYield`**: Similar to `BusyWaitLoop`, but uses `Thread.yield()` to hint to the system to reduce CPU usage. It’s a bit more efficient but still not ideal for CPU usage.
 
@@ -90,8 +88,8 @@ JEGL includes a `LoopStats` class to give you real-time information about your g
 
 ### Explanation
 
-- **`currentMillisPerUpdate`**: Time in milliseconds for each update.
-- **`currentUpdatePerSecond`**: Updates per second calculated from the elapsed time.
+- **`currentMillisPerUpdate`**: Elapsed time in milliseconds for each update.
+- **`currentUpdatePerSecond`**: Current updates per second.
 - **`updates`**: Number of updates that have occurred.
 
 ---
