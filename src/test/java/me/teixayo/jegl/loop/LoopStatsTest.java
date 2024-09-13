@@ -4,7 +4,6 @@ import me.teixayo.jegl.AsyncTestManager;
 import me.teixayo.jegl.LoopAppExample;
 import me.teixayo.jegl.loop.loops.Loop;
 import me.teixayo.jegl.loop.loops.LoopType;
-import me.teixayo.jegl.utils.DaemonThread;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoopStatsTest {

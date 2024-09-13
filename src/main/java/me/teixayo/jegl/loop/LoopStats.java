@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class LoopStats {
 
+    @Setter
     private int updatePerSecond;
     private double currentMillisPerUpdate;
     private double currentUpdatePerSecond;

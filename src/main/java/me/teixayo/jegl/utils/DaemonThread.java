@@ -1,18 +1,20 @@
 package me.teixayo.jegl.utils;
-
 public class DaemonThread {
 
-    public static Thread active() {
-        Thread deamonThread = new Thread(() -> {
-            try {
+    private static Thread daemonThread;
 
-                Thread.sleep(Long.MAX_VALUE);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        deamonThread.setDaemon(true);
-        deamonThread.start();
-        return deamonThread;
+    public static Thread active() {
+        if (daemonThread == null) {
+            daemonThread = new Thread(() -> {
+                try {
+                    Thread.sleep(Long.MAX_VALUE);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            daemonThread.setDaemon(true);
+            daemonThread.start();
+        }
+        return daemonThread;
     }
 }

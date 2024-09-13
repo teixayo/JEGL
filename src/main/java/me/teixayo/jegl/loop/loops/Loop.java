@@ -1,10 +1,8 @@
 package me.teixayo.jegl.loop.loops;
 
 import lombok.Getter;
-import me.teixayo.jegl.exception.InvalidLoopConfigurationException;
 import me.teixayo.jegl.loop.LoopApp;
 import me.teixayo.jegl.loop.LoopStats;
-
 @Getter
 public abstract class Loop implements Runnable {
 
