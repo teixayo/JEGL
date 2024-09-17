@@ -6,8 +6,7 @@
   <a href="https://github.com/teixayo/JEGL/actions/workflows/test.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/test.yml" alt="GitHub Actions Workflow Status">
   </a>
-  <br>
-  <img src="https://img.shields.io/badge/version-v1.0-blue" alt="Version">
+  <img src="https://img.shields.io/github/v/tag/teixayo/JEGL?label=version&color=blue" alt="Latest Version">
 </p>
 
 JEGL (Java Efficient Game Loop) is a lightweight Java library for creating smooth and efficient game loops. It helps manage game updates and timing accurately while using minimal CPU resources. It’s perfect for game development and real-time applications.
