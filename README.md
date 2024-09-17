@@ -55,6 +55,7 @@ Loop loop = LoopBuilder.builder()
     .useThread()
     .loopApp(new MinecraftServer())
     .build();
+loop.start();
 ```
 
 **Game Application (120 FPS):**
@@ -66,6 +67,7 @@ Loop loop = LoopBuilder.builder()
     .useThread()
     .loopApp(new Game())
     .build();
+loop.start();
 ```
 
 ### Note
