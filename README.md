@@ -3,9 +3,7 @@
 # JEGL (Java Efficient Game Loop)
 
 <p align="center">
-  <a href="https://github.com/teixayo/JEGL/actions/workflows/test.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/test.yml" alt="GitHub Actions Workflow Status">
-  </a>
+  <img src="https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/test.yml" alt="GitHub Actions Workflow Status">
   <img src="https://img.shields.io/github/v/tag/teixayo/JEGL?label=version&color=blue" alt="Latest Version">
 </p>
 
