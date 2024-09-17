@@ -2,7 +2,7 @@
 
 # JEGL (Java Efficient Game Loop)
 
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/test.yml)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/test.yml)
 ![License](https://img.shields.io/github/license/teixayo/JEGL)
 ![Contributors](https://img.shields.io/github/contributors/teixayo/JEGL)
 
