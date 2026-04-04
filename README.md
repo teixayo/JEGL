@@ -2,9 +2,10 @@
 
 # JEGL (Java Efficient Game Loop)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/run-tests.yml)
-![License](https://img.shields.io/github/license/teixayo/JEGL)
-![Contributors](https://img.shields.io/github/contributors/teixayo/JEGL)
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/teixayo/JEGL/test.yml" alt="GitHub Actions Workflow Status">
+  <img src="https://img.shields.io/github/v/tag/teixayo/JEGL?label=version&color=blue" alt="Latest Version">
+</p>
 
 JEGL (Java Efficient Game Loop) is a lightweight Java library for creating smooth and efficient game loops. It helps manage game updates and timing accurately while using minimal CPU resources. It’s perfect for game development and real-time applications.
 
@@ -54,6 +55,7 @@ Loop loop = LoopBuilder.builder()
     .useThread()
     .loopApp(new MinecraftServer())
     .build();
+loop.start();
 ```
 
 **Game Application (120 FPS):**
@@ -65,6 +67,7 @@ Loop loop = LoopBuilder.builder()
     .useThread()
     .loopApp(new Game())
     .build();
+loop.start();
 ```
 
 ### Note
