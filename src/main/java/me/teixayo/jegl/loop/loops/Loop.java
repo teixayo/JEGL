@@ -9,7 +9,7 @@ public abstract class Loop implements Runnable {
 
     protected long nanosPerUpdate;
     protected LoopApp loopApp;
-    protected boolean isRunning;
+    protected volatile boolean isRunning;
     protected long updates;
     protected long startTime;
     protected LoopStats loopStats;

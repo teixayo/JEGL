@@ -11,7 +11,7 @@ public class LoopStats {
     private double currentMillisPerUpdate;
     private double currentUpdatePerSecond;
     private long totalElapsedTimeNanos;
-    private int updates;
+    private long updates;
 
 
     public LoopStats(int updatePerSecond) {
